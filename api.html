@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="api.css" rel="stylesheet" type="text/css" />
+    <!-- Awesome five  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css'>   
+  <!-- BOOTSTRAP CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> 
+  <!-- jQUERY -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html"> Jennas Kitchen </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+           <li class="nav-item">
+            <a class="nav-link active" href="about.html">Meet Jenna</a>
+        </li>
+           <li class="nav-item">
+            <a class="nav-link" href="api.html">Explore Recipes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="store.html">Shop</a>
+          </li> 
+        </ul>
+      </div>
+    </div>
+  </nav>
+<!-- header -->
+
+    <header class="bg-primary text-white text-center p-5">
+
+        <h1 class="display-1 mb-3">Jennas Recipe Generator</h1>
+        <h3> Welcome to my Recipe Generator! Down below you will be able to add three ingredients of your choice and I will try my best to get you a recipe!</h3>
+
+    </header>
+
+  <!--Recipe Finder -->
+  <div class = "cheese">
+    <h2 class = "entIng">  Enter Three Ingredients Below <i class="fa fa-arrow-down" aria-hidden="true"></i> </h2>
+    <u><p class = "ingredients">Ingredient 1 <i class="fa fa-cutlery" aria-hidden="true"></i></p></u>
+     <input class="ing1"  placeholder=""> 
+    <u><p class = "ingredients"> Ingredient 2 <i class="fa fa-cutlery" aria-hidden="true"></i></p></u>
+     <input class="ing2"  placeholder=""> 
+    <u><p class = "ingredients"> Ingredient 3 <i class="fa fa-cutlery" aria-hidden="true"></i></p></u>
+     <input class="ing3"  placeholder=""> 
+  <br>
+    
+  <button type="button" class="btn btn-outline-success submitButton" onclick="findFood()">Find!</button>
+    
+  <h2 class = "foodName"> </h2>
+   
+  <img class = "foodImg" src ="">
+  
+  <h2 class = "instructions"> </h2>
+
+
+  </div>
+  
+  <!-- footer -->
+  <div class="global">
+    <div class="curve"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-3">
+          <h6>Jennas Kitchen</h6>
+          <p>Elevate Your Culinary Experience with Premium Ingredients and Thoughtfully Crafted Recipes. Explore a World of Flavors and Delight Your Palate with Our Exclusive Collection of Culinary Creations. Cook Like a Pro, Every Time.</p>
+        </div>
+
+        <div class="col-sm-6 col-md-2">
+            <h6>Services</h6>
+            <ul>
+              <li><a href="#">Email Marketing</a> </li>
+              <li><a href="#">Campaigns</a> </li>
+              <li><a href="#">Branding</a> </li>
+              <li><a href="#">Offline</a> </li>
+            </ul>
+        </div>
+
+        <div class="col-sm-6 col-md-2">
+            <h6>Info</h6>
+            <ul>
+               <li><a href="#">Jennas Kitchen</a> </li>
+              <li><a href="#">About Jenna</a> </li>
+              <li><a href="#">Recipes</a> </li>
+              <li><a href="#">Shop</a> </li>
+            </ul>
+        </div>
+
+        <div class="col-sm-6 col-md-2">
+            <h6>Legal</h6>
+            <ul>
+              <li><a href="#">Terms & Conditions</a> </li>
+              <li><a href="#">Privacy Policy</a> </li>
+              <li><a href="#">Terms of use</a> </li>
+            </ul>
+        </div>
+
+        <div class="social">
+          <h6>Follow us</h6>
+          <a href="#"><i class="fa fa-facebook"></i> </a>
+          <a href="#"><i class="fa fa-twitter"></i> </a>
+          <a href="#"><i class="fa fa-snapchat-ghost"></i> </a>
+          <a href="#"><i class="fa fa-instagram"></i> </a>
+          <a href="#"><i class="fa fa-google-plus"></i> </a>
+        </div>
+
+      </div>
+      <p class="copyright"> &copy; Copyright All rights reserved. </p>
+    </div>
+  </div>
+
+
+<script>
+
+  let url = "https://api.spoonacular.com/recipes/"
+
+
+  function findFood(){
+    let ing1 = $('.ing1').val();
+    let ing2 = $('.ing2').val();
+    let ing3 = $('.ing3').val();
+
+    let url2 = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=a1dc2f1731664ae1b0fa347c34c67223&ingredients="+ing1+","+ing2+","+ing3+"&number=1";
+
+    // let request = new XMLHttpsRequest();
+    let request = new XMLHttpRequest();
+    //get stuff
+
+    request.open("GET", url2, true);
+
+    request.onload = function(){
+
+      let data = JSON.parse(this.response);
+      //make sure it runs good
+      if(request.status >= 200 && request.status <400)
+      {
+        console.log(data);
+
+        foodImage = data[0].image;
+        foodTitle = data[0].title;
+        foodID = data[0].id;
+        $(".foodName").text(foodTitle);
+        $(".foodImg").attr(`src` , foodImage);
+
+        let urlN = "https://api.spoonacular.com/recipes/"+resId+"/information?apiKey=a1dc2f1731664ae1b0fa347c34c67223";
+
+        let request2 = new XMLHttpRequest();
+
+        request2.open("GET", urlN, true);
+
+        request2.onload = function(){
+
+          let newData = JSON.parse(this,response);
+
+          if(request.status >= 200 && request.status <400){
+             let resInstruct = newData.instructions;
+             console.log(resInstruct);
+            if(resInstruct == null){
+              $(".instructions").text("No instructions available");
+            }
+            else {
+              $(".instructions").text(resInstruct);
+            }      
+          }
+
+
+        };
+        request2.send();
+      }
+
+      //optional stuff but will prolly add on ltr
+     /* if(request.status >= 200 && request.status <400){
+       let resInstruct = newData.instructions;
+       console.log(resInstruct);
+      if(resInstruct == null){
+        $(".instructions").text("No instructions available");
+      }
+      else{
+        $(".instructions").text(resInstruct);
+      }      
+    }
+  */
+
+   };
+    request.send();
+
+
+
+  }
+</script>
+
+
+
+
+
+
+  
+  <!-- <script src="script.js"></script> -->
+
+ 
+</body>
+
+</html>
